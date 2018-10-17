@@ -40,16 +40,16 @@ class TM1638 : public TM16XX
 
     /** Set the display to a unsigned hexadecimal number (with or without leading zeros) */
     void setDisplayToHexNumber(unsigned long number, byte dots, boolean leadingZeros = true,
-		const byte numberFont[] = NUMBER_FONT);
+		const byte numberFont[] PROGMEM = NUMBER_FONT);
     /** Set the display to a unsigned decimal number (with or without leading zeros) */
     void setDisplayToDecNumber(unsigned long number, byte dots, boolean leadingZeros = true,
-		const byte numberFont[] = NUMBER_FONT);
+		const byte numberFont[] PROGMEM = NUMBER_FONT);
     /** Set the display to a signed decimal number (with or without leading zeros) */
     void setDisplayToSignedDecNumber(signed long number, byte dots, boolean leadingZeros = true,
-		const byte numberFont[] = NUMBER_FONT);
+		const byte numberFont[] PROGMEM = NUMBER_FONT);
     /** Set the display to a unsigned binary number */
     void setDisplayToBinNumber(byte number, byte dots,
-		const byte numberFont[] = NUMBER_FONT);
+		const byte numberFont[] PROGMEM = NUMBER_FONT);
 
     /** Set the LED at pos to color (TM1638_COLOR_RED, TM1638_COLOR_GREEN or both) */
     virtual void setLED(byte color, byte pos);
@@ -62,7 +62,7 @@ class TM1638 : public TM16XX
   protected:
     virtual void sendChar(byte pos, byte data, boolean dot);
     void setDisplayToDecNumberAt(unsigned long number, byte dots, byte startingPos,
-    	boolean leadingZeros, const byte numberFont[]);
+    	boolean leadingZeros, const byte numberFont[] PROGMEM);
 };
 
 #endif

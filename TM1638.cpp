@@ -31,8 +31,13 @@ TM1638::TM1638(byte dataPin, byte clockPin, byte strobePin, boolean activateDisp
 	// nothing else to do - calling super is enough
 }
 
-void TM1638::setDisplayToHexNumber(unsigned long number, byte dots, boolean leadingZeros,
-	const byte numberFont[])
+void TM1638::setDisplayToHexNumber
+(
+    unsigned long number,
+    byte dots,
+    boolean leadingZeros,
+    const byte numberFont[] PROGMEM
+)
 {
   for (int i = 0; i < displays; i++) {
 	if (!leadingZeros && number == 0) {
@@ -44,8 +49,14 @@ void TM1638::setDisplayToHexNumber(unsigned long number, byte dots, boolean lead
   }
 }
 
-void TM1638::setDisplayToDecNumberAt(unsigned long number, byte dots, byte startingPos, boolean leadingZeros,
-	const byte numberFont[])
+void TM1638::setDisplayToDecNumberAt
+(
+    unsigned long number,
+    byte dots,
+    byte startingPos,
+    boolean leadingZeros,
+    const byte numberFont[] PROGMEM
+)
 {
   if (number > 99999999L) {
     setDisplayToError();
@@ -65,14 +76,24 @@ void TM1638::setDisplayToDecNumberAt(unsigned long number, byte dots, byte start
   }
 }
 
-void TM1638::setDisplayToDecNumber(unsigned long number, byte dots, boolean leadingZeros,
-	const byte numberFont[])
+void TM1638::setDisplayToDecNumber
+(
+    unsigned long number,
+    byte dots,
+    boolean leadingZeros,
+    const byte numberFont[] PROGMEM
+)
 {
 	setDisplayToDecNumberAt(number, dots, 0, leadingZeros, numberFont);
 }
 
-void TM1638::setDisplayToSignedDecNumber(signed long number, byte dots, boolean leadingZeros,
-		const byte numberFont[])
+void TM1638::setDisplayToSignedDecNumber
+(
+    signed long number,
+    byte dots,
+    boolean leadingZeros,
+    const byte numberFont[] PROGMEM
+)
 {
 	if (number >= 0) {
 		setDisplayToDecNumberAt(number, dots, 0, leadingZeros, numberFont);
@@ -86,7 +107,12 @@ void TM1638::setDisplayToSignedDecNumber(signed long number, byte dots, boolean 
 	}
 }
 
-void TM1638::setDisplayToBinNumber(byte number, byte dots, const byte numberFont[])
+void TM1638::setDisplayToBinNumber
+(
+    byte number,
+    byte dots,
+    const byte numberFont[] PROGMEM
+)
 {
   for (int i = 0; i < displays; i++) {
     setDisplayDigit((number & (1 << i)) == 0 ? 0 : 1, displays - i - 1, (dots & (1 << i)) != 0, numberFont);

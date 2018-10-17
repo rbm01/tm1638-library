@@ -31,7 +31,7 @@ The bits are displayed by mapping bellow
 #define TM16XXFonts_h
 
 // definition for standard hexadecimal numbers
-const byte NUMBER_FONT[] = {
+const byte NUMBER_FONT[] PROGMEM = {
   0b00111111, // 0
   0b00000110, // 1
   0b01011011, // 2
@@ -65,7 +65,7 @@ const byte ERROR_DATA[] = {
 };
 
 // definition for the displayable ASCII chars
-const byte FONT_DEFAULT[] = {
+const byte FONT_DEFAULT[] PROGMEM = {
   0b00000000, // (32)  <space>
   0b10000110, // (33)	!
   0b00100010, // (34)	"
@@ -89,7 +89,7 @@ const byte FONT_DEFAULT[] = {
   0b01100110, // (52)	4
   0b01101101, // (53)	5
   0b01111101, // (54)	6
-  0b00100111, // (55)	7
+  0b00000111, // (55)	7
   0b01111111, // (56)	8
   0b01101111, // (57)	9
   0b00000000, // (58)	:

@@ -49,7 +49,13 @@ void TM1638QYF::clearDisplay()
 	setDisplay(NULL, 0);
 }
 
-void TM1638QYF::setDisplayToString(const char* string, const word dots, const byte ignored,	const byte font[])
+void TM1638QYF::setDisplayToString
+(
+    const char* string,
+    const word dots,
+    const byte ignored,
+    const byte font[] PROGMEM
+)
 {
 	byte values[displays];
 	boolean done = false;
@@ -68,7 +74,13 @@ void TM1638QYF::setDisplayToString(const char* string, const word dots, const by
 	setDisplay(values, displays);
 }
 
-void TM1638QYF::setDisplayToString(String string, const word dots, const byte ignored, const byte font[])
+void TM1638QYF::setDisplayToString
+(
+    String string,
+    const word dots,
+    const byte ignored,
+    const byte font[] PROGMEM
+)
 {
   byte values[displays];
   int stringLength = string.length();
@@ -86,21 +98,33 @@ void TM1638QYF::setDisplayToString(String string, const word dots, const byte ig
   setDisplay(values, displays);
 }
 
-void TM1638QYF::setDisplayToBinNumber(byte number, byte dots, const byte numberFont[])
+void TM1638QYF::setDisplayToBinNumber
+(
+    byte number,
+    byte dots,
+    const byte numberFont[] PROGMEM
+)
 {
 	byte values[displays];
 
 	memset(values, 0, displays * sizeof(byte));
 
 	for (int i = 0; i < displays; i++) {
-		values[i] = numberFont[(number >> (displays - i - 1)) & 1] | (((dots >> (displays - i - 1)) & 1) << 7);
+            values[i] = (byte)pgm_read_byte(numberFont + ((number >> (displays - i - 1)) & 1))
+                          | (((dots >> (displays - i - 1)) & 1) << 7);
+            //values[i] = numberFont[(number >> (displays - i - 1)) & 1] | (((dots >> (displays - i - 1)) & 1) << 7);
 	}
 
 	setDisplay(values, displays);
 }
 
-void TM1638QYF::setDisplayToHexNumber(unsigned long number, byte dots, boolean leadingZeros,
-	const byte numberFont[])
+void TM1638QYF::setDisplayToHexNumber
+(
+    unsigned long number,
+    byte dots,
+    boolean leadingZeros,
+    const byte numberFont[] PROGMEM
+)
 {
 	char values[displays + 1];
 
@@ -109,8 +133,13 @@ void TM1638QYF::setDisplayToHexNumber(unsigned long number, byte dots, boolean l
 	setDisplayToString(values, dots, 0, numberFont);
 }
 
-void TM1638QYF::setDisplayToDecNumber(unsigned long number, byte dots, boolean leadingZeros,
-	const byte numberFont[])
+void TM1638QYF::setDisplayToDecNumber
+(
+    unsigned long number,
+    byte dots,
+    boolean leadingZeros,
+    const byte numberFont[] PROGMEM
+)
 {
 	char values[displays + 1];
 
@@ -121,8 +150,13 @@ void TM1638QYF::setDisplayToDecNumber(unsigned long number, byte dots, boolean l
 	setDisplayToString(values, dots, 0, numberFont);
 }
 
-void TM1638QYF::setDisplayToSignedDecNumber(signed long number, byte dots, boolean leadingZeros,
-		const byte numberFont[])
+void TM1638QYF::setDisplayToSignedDecNumber
+(
+    signed long number,
+    byte dots,
+    boolean leadingZeros,
+    const byte numberFont[] PROGMEM
+)
 {
 	char values[displays + 1];
 

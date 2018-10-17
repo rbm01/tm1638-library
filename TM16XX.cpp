@@ -62,9 +62,16 @@ void TM16XX::setupDisplay(boolean active, byte intensity)
   digitalWrite(strobePin, HIGH);
 }
 
-void TM16XX::setDisplayDigit(byte digit, byte pos, boolean dot, const byte numberFont[])
+void TM16XX::setDisplayDigit
+(
+    byte digit,
+    byte pos,
+    boolean dot,
+    const byte numberFont[] PROGMEM
+)
 {
-  sendChar(pos, numberFont[digit & 0xF], dot);
+    sendChar(pos, (byte)pgm_read_byte(numberFont + (digit & 0xF)), dot);
+  //sendChar(pos, numberFont[digit & 0xF], dot);
 }
 
 void TM16XX::setDisplayToError()
@@ -95,24 +102,38 @@ void TM16XX::clearDisplay()
   }
 }
 
-void TM16XX::setDisplayToString(const char* string, const word dots, const byte pos, const byte font[])
+void TM16XX::setDisplayToString
+(
+    const char* string,
+    const word dots,
+    const byte pos,
+    const byte font[] PROGMEM
+)
 {
   for (int i = 0; i < displays - pos; i++) {
   	if (string[i] != '\0') {
-	  sendChar(i + pos, font[string[i] - 32], (dots & (1 << (displays - i - 1))) != 0);
+	  sendChar(i + pos, (byte)pgm_read_byte(font + string[i] - 32), (dots & (1 << (displays - i - 1))) != 0);
+	  //sendChar(i + pos, font[string[i] - 32], (dots & (1 << (displays - i - 1))) != 0);
 	} else {
 	  break;
 	}
   }
 }
 
-void TM16XX::setDisplayToString(const String string, const word dots, const byte pos, const byte font[])
+void TM16XX::setDisplayToString
+(
+    const String string,
+    const word dots,
+    const byte pos,
+    const byte font[] PROGMEM
+)
 {
   int stringLength = string.length();
 
   for (int i = 0; i < displays - pos; i++) {
     if (i < stringLength) {
-      sendChar(i + pos, font[string.charAt(i) - 32], (dots & (1 << (displays - i - 1))) != 0);
+        sendChar(i + pos, (byte)pgm_read_byte(font + string.charAt(i) - 32), (dots & (1 << (displays - i - 1))) != 0);
+      //sendChar(i + pos, font[string.charAt(i) - 32], (dots & (1 << (displays - i - 1))) != 0);
     } else {
       break;
     }

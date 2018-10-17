@@ -41,7 +41,7 @@ class TM16XX
     virtual void setupDisplay(boolean active, byte intensity);
 
     /** Set a single display at pos (starting at 0) to a digit (left to right) */
-    virtual void setDisplayDigit(byte digit, byte pos, boolean dot, const byte numberFont[] = NUMBER_FONT);
+    virtual void setDisplayDigit(byte digit, byte pos, boolean dot, const byte numberFont[] PROGMEM = NUMBER_FONT);
 	/** Set the display to an error message */
 	virtual void setDisplayToError();
 	/** Clear  a single display at pos (starting at 0, left to right) */ 
@@ -53,10 +53,10 @@ class TM16XX
 
     /** Set the display to the string (defaults to built in font) */
 	virtual void setDisplayToString(const char* string, const word dots = 0, const byte pos = 0,
-		const byte font[] = FONT_DEFAULT);
+		const byte font[] PROGMEM = FONT_DEFAULT);
     /** Set the display to the String (defaults to built in font) */
 	virtual void setDisplayToString(String string, const word dots = 0, const byte pos = 0,
-		const byte font[] = FONT_DEFAULT);
+		const byte font[] PROGMEM = FONT_DEFAULT);
 
   protected:
 	#if defined(ARDUINO) && ARDUINO >= 100

@@ -36,25 +36,25 @@ class TM1638QYF : public TM16XX
 
     /** Set the display to a unsigned hexadecimal number (with or without leading zeros) */
     void setDisplayToHexNumber(unsigned long number, byte dots, boolean leadingZeros = true,
-		const byte numberFont[] = FONT_DEFAULT);
+		const byte numberFont[] PROGMEM = FONT_DEFAULT);
     /** Set the display to a unsigned decimal number (with or without leading zeros) */
     void setDisplayToDecNumber(unsigned long number, byte dots, boolean leadingZeros = true,
-		const byte numberFont[] = FONT_DEFAULT);
+		const byte numberFont[] PROGMEM = FONT_DEFAULT);
     /** Set the display to a signed decimal number (with or without leading zeros) */
     void setDisplayToSignedDecNumber(signed long number, byte dots, boolean leadingZeros = true,
-		const byte numberFont[] = FONT_DEFAULT);
+		const byte numberFont[] PROGMEM = FONT_DEFAULT);
     /** Set the display to a unsigned binary number */
     void setDisplayToBinNumber(byte number, byte dots,
-		const byte numberFont[] = NUMBER_FONT);
+		const byte numberFont[] PROGMEM = NUMBER_FONT);
 
 	/** Clear the display */
 	virtual void clearDisplay();
     /** Set the display to the String (defaults to built in font) - pos is ignored in common anode */
 	virtual void setDisplayToString(const char* string, const word dots = 0, const byte pos = 0,
-		const byte font[] = FONT_DEFAULT);
+		const byte font[] PROGMEM = FONT_DEFAULT);
     /** Set the display to the String (defaults to built in font) - pos is ignored in common anode */
 	virtual void setDisplayToString(String string, const word dots = 0, const byte pos = 0,
-		const byte font[] = FONT_DEFAULT);
+		const byte font[] PROGMEM = FONT_DEFAULT);
 
     /** Returns the pressed buttons as a bit set (left to right). */
     virtual word getButtons();
@@ -65,7 +65,7 @@ class TM1638QYF : public TM16XX
 
   private:
 	// unsupported in common anode design
-    virtual void setDisplayDigit(byte digit, byte pos, boolean dot, const byte numberFont[] = NUMBER_FONT) { setDisplayToError(); };
+    virtual void setDisplayDigit(byte digit, byte pos, boolean dot, const byte numberFont[] PROGMEM = NUMBER_FONT) { setDisplayToError(); };
 	// unsupported in common anode design
     virtual void clearDisplayDigit(byte pos, boolean dot) { setDisplayToError(); };
 	// unsupported in common anode design
