@@ -25,6 +25,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 	#include "WProgram.h"
 #endif
 
+#ifdef ARDUINO
+	#include <avr/pgmspace.h>
+#else
+	#define PROGMEM
+	#define pgm_read_byte(a) (*(a))
+#endif /* ARDUINO */
+
 #include "TM16XXFonts.h"
 
 class TM16XX
